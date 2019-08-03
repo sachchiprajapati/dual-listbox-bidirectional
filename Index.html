@@ -7,49 +7,31 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
-        .customlist {
+        .customlist > li {
+            cursor: pointer;
+            font-weight: 550;
+            padding: 6px 6px;
+        }
+
+        ul.customlist {
             height: 300px;
             overflow: auto;
             border: 1px solid #dbe1e8;
-        }
-
-            .customlist > li {
-                cursor: pointer;
-            }
-
-        ul.customlist {
             margin: 0;
             padding: 0;
             width: 100%;
             white-space: nowrap;
             overflow-x: auto;
+            display: inline-grid !important;
+            grid-auto-rows: minmax(max-content, 0fr);
         }
 
-        .list-group-item {
-            font-weight: 550;
-            padding: 6px 6px;
-        }
 
         .liselected {
             z-index: 2;
             color: #fff;
             background-color: #337ab7;
             border-color: #337ab7;
-        }
-
-        .list-group {
-            list-style: none !important;
-            white-space: nowrap !important;
-            display: inline-grid !important;
-            grid-auto-rows: minmax(max-content, 0fr);
-        }
-
-        .list-group-item {
-            display: inline-block !important;
-            float: left !important;
-            clear: both !important;
-            height: 36px;
-            width: 100%;
         }
     </style>
     <script type="text/javascript" src="js/jquery.min.js"></script>
