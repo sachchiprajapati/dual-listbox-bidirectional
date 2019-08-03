@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>dual-list-box-bidirectional</title>
+    <link rel="icon" type="image/gif" href="favicon.gif" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        .customlist {
+            height: 300px;
+            overflow: auto;
+            border: 1px solid #dbe1e8;
+        }
+
+            .customlist > li {
+                cursor: pointer;
+            }
+
+        ul.customlist {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            white-space: nowrap;
+            overflow-x: auto;
+        }
+
+        .list-group-item {
+            font-weight: 550;
+            padding: 6px 6px;
+        }
+
+        .liselected {
+            z-index: 2;
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #337ab7;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/custommultiselect.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <br />
+        <div class="panel panel-default">
+            <div class="panel-heading"><h2><b>Dual List Bidirectional</b></h2></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-12 col-lg-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <input id="lstCourseFilter" name="lstCourseFilter" class="form-control ui-wizard-content" placeholder="Search for Course" data-tooltiptitle="Search Course" title="Search Course" type="text">
+                                            <div class="input-group-btn">
+                                                <button type="button" class="btn btn-info dropdown-toggle ui-wizard-content" id="AvailableCourseFilter" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-filter"></i></button>
+                                                <ul class="dropdown-menu dropdown-menu-right dpCourseFilter">
+                                                    <li class="clickme"><a href="javascript:void(0)" data-id="NoFilter">NoFilter</a></li>
+                                                    <li class="clickme"><a href="javascript:void(0)" data-id="Contains">Contains</a></li>
+                                                    <li class="clickme"><a href="javascript:void(0)" data-id="DoesNotContain">DoesNotContain</a></li>
+                                                    <li class="clickme"><a href="javascript:void(0)" data-id="StartsWith">StartsWith</a></li>
+                                                    <li class="clickme"><a href="javascript:void(0)" data-id="EndsWith">EndsWith</a></li>
+                                                    <li class="clickme"><a href="javascript:void(0)" data-id="EqualTo">EqualTo</a></li>
+                                                    <li class="clickme"><a href="javascript:void(0)" data-id="NotEqualTo">NotEqualTo</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <ul class="list-group customlist" id="lstCourse" style="margin-top: 5%;">
+                                            <li class="list-group-item disabled">Porta ac consectetur ac Porta ac consectetur ac Porta ac consectetur ac</li>
+                                            <li class="list-group-item">First item</li>
+                                            <li class="list-group-item">Second item</li>
+                                            <li class="list-group-item">Third item</li>
+                                            <li class="list-group-item">Cras justo odio</li>
+                                            <li class="list-group-item">Dapibus ac facilisis in</li>
+                                            <li class="list-group-item">Morbi leo risus</li>
+                                            <li class="list-group-item">Vestibulum at eros</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" id="lstCourse_undo" class="btn btn-xs btn-danger btn-block ui-wizard-content" data-toggle="tooltip" data-original-title="Undo" title="Undo"><i class="fa fa-undo"></i></button>
+                                        <button type="button" id="lstCourse_rightAll" class="btn btn-xs btn-default btn-block ui-wizard-content" data-toggle="tooltip" data-original-title="Forward" title="Forward"><i class="fa fa-forward"></i></button>
+                                        <button type="button" id="lstCourse_rightSelected" class="btn btn-xs btn-default btn-block ui-wizard-content" data-toggle="tooltip" data-original-title="Right" title="Right"><i class="fa fa-chevron-right"></i></button>
+                                        <button type="button" id="lstCourse_leftSelected" class="btn btn-xs btn-default btn-block ui-wizard-content" data-toggle="tooltip" data-original-title="Left" title="Left"><i class="fa fa-chevron-left"></i></button>
+                                        <button type="button" id="lstCourse_leftAll" class="btn btn-xs btn-default btn-block ui-wizard-content" data-toggle="tooltip" data-original-title="Backward" title="Backward"><i class="fa fa-backward"></i></button>
+                                        <button type="button" id="lstCourse_move_up" class="btn btn-xs btn-default btn-block ui-wizard-content" data-toggle="tooltip" data-original-title="Up" title="Up"><i class="glyphicon glyphicon-arrow-up"></i></button>
+                                        <button type="button" id="lstCourse_move_down" class="btn btn-xs btn-default btn-block ui-wizard-content" data-toggle="tooltip" data-original-title="Down" title="Down"><i class="glyphicon glyphicon-arrow-down"></i></button>
+                                        <button type="button" id="lstCourse_redo" class="btn btn-xs btn-danger btn-block ui-wizard-content" data-toggle="tooltip" data-original-title="Redo" title="Redo"><i class="fa fa-repeat"></i></button>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <input id="lstCourse_toSearch" name="lstCourse_toSearch" class="form-control ui-wizard-content" placeholder="Search for Course" data-tooltiptitle="Search Course" title="Search Course" type="search">
+                                            <div class="input-group-btn">
+                                                <button type="button" class="btn btn-info dropdown-toggle ui-wizard-content" aria-expanded="true"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                        <ul class="list-group customlist" id="lstCourse_to" style="margin-top: 5%;">
+                                            <li class="list-group-item">Art, Grade 1</li>
+                                            <li class="list-group-item">Art, Grade 3</li>
+                                            <li class="list-group-item">Third itemdsfcdfvdd</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    $(document).ready(function () {
+        $('.customlist li:not(.disabled)').on('click', function () {
+            $(this).toggleClass('liselected');
+        });
+
+        $('#lstCourse').custommultiselect({
+            activeclassName: 'liselected'
+        });
+    });
+
+    $("#lstCourse_toSearch").keyup(function () {
+        var search = $(this).val();
+
+        SearchCriteria('lstCourse_to', search);
+
+    });
+
+    $('.dpCourseFilter a').on('click', function () {
+
+        var Filter = $(this).text();
+        var search = $('#lstCourseFilter').val();
+
+        FilterCriteria('lstCourse', Filter, search);
+    });
+
+    function SearchCriteria(Id, search) {
+        if (search == "") {
+            $("#" + Id + "> li").show();
+        } else {
+            $("#" + Id + "> li").each(function () {
+                if ((($(this).text()).toLowerCase()).indexOf(search.toLowerCase()) > -1) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+    }
+
+    function FilterCriteria(Id, Filter, search) {
+
+        if (Filter.toLocaleLowerCase() == "NoFilter".toLocaleLowerCase()) {
+            $("#" + Id + " > li").show();
+        }
+        if (search != "") {
+            if (Filter.toLocaleLowerCase() == "Contains".toLocaleLowerCase()) {
+                $("#" + Id + " > li").each(function () {
+                    if ((($(this).text()).toLowerCase()).indexOf(search.toLowerCase()) > -1) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+            else if (Filter.toLocaleLowerCase() == "DoesNotContain".toLocaleLowerCase()) {
+                $("#" + Id + " > li").each(function () {
+                    if ((($(this).text()).toLowerCase()).indexOf(search.toLowerCase()) > -1) {
+                        $(this).hide();
+                    } else {
+                        $(this).show();
+                    }
+                });
+            }
+            else if (Filter.toLocaleLowerCase() == "StartsWith".toLocaleLowerCase()) {
+                $("#" + Id + " > li").each(function () {
+                    if ($(this).text().startsWith(search)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+            else if (Filter.toLocaleLowerCase() == "EndsWith".toLocaleLowerCase()) {
+
+                $("#" + Id + " > li").each(function () {
+                    if ($(this).text().endsWith(search)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+            else if (Filter.toLocaleLowerCase() == "EqualTo".toLocaleLowerCase()) {
+                $("#" + Id + " > li").each(function () {
+                    if ($(this).text() == search) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+            else if (Filter.toLocaleLowerCase() == "NotEqualTo".toLocaleLowerCase()) {
+                $("#" + Id + " > li").each(function () {
+                    if ($(this).text() != search) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+        }
+    }
+</script>
