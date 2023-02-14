@@ -1,4 +1,4 @@
-# dual-listbox-bidirectional
+# JQuery Custom dual-listbox-bidirectional Plugin
 
 
 
